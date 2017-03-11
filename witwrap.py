@@ -62,19 +62,14 @@ def parse_message(msg, clients):
     return fin
 
 def process_dict(responsedict):
-    print("Log")
     if 'comparison' in responsedict:
-        print("Bog")
         if "less" in responsedict['comparison']:
-            print("Fog")
             for (x, y) in responsedict.items():
-                print("sog")
                 if x != "comparison":
-                    print("yog")
                     if len(y) == 2:
-                        print("grog")
                         responsedict['lesser'].append(y[0])
                         responsedict['greater'].append(y[1])
+                        del responsedict[x]
             del responsedict['comparison']
         elif "greater" in responsedict['comparison']:
             for (x, y) in responsedict.items():
@@ -82,11 +77,10 @@ def process_dict(responsedict):
                     if len(y) == 2:
                         responsedict['greater'].append(y[0])
                         responsedict['lesser'].append(y[1])
+                        del responsedict[x]
             del responsedict['comparison']
         else:
             raise NameError("Non-less or greater in comparison")
-    else:
-        print("yo gabba gabba")
     return responsedict
 
 def find_stockcode(wolfdict):
@@ -114,7 +108,6 @@ if __name__ == "__main__":
         rawin = raw_input(">>>")
         try:
             x = (parse_message(rawin, z))
-            print(x)
             print(process_dict(x))
         except Exception as e:
             print(str(e))
