@@ -4,8 +4,11 @@ import json
 
 import requests
 from flask import Flask, request
+from witwrap import configure_wit
 
 app = Flask(__name__)
+w = configure_wit()
+
 
 
 @app.route('/', methods=['GET'])
@@ -38,6 +41,7 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     message_text = messaging_event["message"]["text"]  # the message's text
 
+                    '''
                     # need to send text to wit
                     wit_out ={
                             'u_id':"12341234123412341234",
@@ -50,11 +54,12 @@ def webhook():
                     
                     # log(wit_out)
                     # finally send confirmation message
-                    send_message(sender_id, "Subscribed you to %s" % "test")
                     wit_out['password'] = os.environ["PHPPASSWORD"]
                     # the send the output to php db
                     r = requests.post("http://www.anyonetrades.com/api.php", data=wit_out, verify=False)
                     log(r)
+                    '''
+                    send_message(sender_id, "Subscribed you to %s" % "test")
 
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
                     pass
@@ -66,9 +71,7 @@ def notifyhook():
 
     data = request.get_json()
     
-    message = None
-
-    send_message(data['id'], message)
+    send_message(data['u_id'], data['notif'])
 
     return "ok", 200
     
