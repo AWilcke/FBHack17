@@ -7,6 +7,7 @@ from wit import Wit
 wolfsearch = re.compile('\(([A-Z]{2}(?:[^) ]){1,8})\)')
 
 
+
 def configure_wit(actions=None):
     if actions is None:
         actions = {}
