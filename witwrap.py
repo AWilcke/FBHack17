@@ -34,9 +34,8 @@ def parse_message(msg, clients):
         (dicts, key) in [(response[key], key) for key in response]
         for dic in dicts
         ]
-    print(tupform)
     fin = defaultdict(list)
-    for (x,y) in tupform:
+    for (x, y) in tupform:
         fin[x].append(y)
     #fin = dict((x, y) for x, y in tupform)
     if 'stock' not in fin:
