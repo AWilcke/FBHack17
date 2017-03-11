@@ -69,7 +69,7 @@ def parse_message(msg, clients):
         del fin['currency']
     if 'average' in fin['metric']:
         fin['metric'] = ['simple moving average']
-    return fin
+    return dedictify(process_dict(fin))
 
 
 def dedictify(responsedict):
@@ -78,7 +78,7 @@ def dedictify(responsedict):
         if len(v) == 1:
             returndict[k] = v[0]
         else:
-            raise IndexError("Too many objects")
+            returndict[k] = v
     return returndict
 
 def process_dict(responsedict):
@@ -130,7 +130,7 @@ if __name__ == "__main__":
         rawin = raw_input(">>>")
         try:
             x = (parse_message(rawin, z))
-            print(process_dict(x))
+            print(x)
         except Exception as e:
             print(str(e))
             pass
