@@ -53,8 +53,16 @@ def parse_message(msg, clients):
         else:
             stock = re.findall('([A-Z](?:[^ a-z]){2,9})', msg)
             if len(stock) != 1:
-                print(stock)
-                raise KeyError('failed to identify stock name!')
+                company_name = re.findall('^.+ .?([A-Z][a-z]+)(?= )', msg)
+                if len(company_name) != 1:
+                    raise KeyError('failed to identify stock name!')
+                else:
+                    wolfresponse = wolfstance.query(company_name[0])
+                    wolfproc = find_stockcode(wolfresponse)
+                    if wolfproc[1]:
+                        fin['stock'] = wolfproc[0]
+                    else:
+                        raise KeyError('failed to identify stock name!')
             else:
                 fin['stock'] = stock[0]
     if 'currency' in fin and 'percent' in fin:
