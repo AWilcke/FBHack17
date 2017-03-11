@@ -1,11 +1,11 @@
 import os
 import re
-import wolframalpha
 from collections import defaultdict
+
+import wolframalpha
 from wit import Wit
 
 wolfsearch = re.compile('\(([A-Z]{2}(?:[^) ]){1,8})\)')
-
 
 
 def configure_wit(actions=None):
@@ -61,6 +61,7 @@ def parse_message(msg, clients):
         del fin['currency']
     return fin
 
+
 def process_dict(responsedict):
     if 'comparison' in responsedict:
         if "less" in responsedict['comparison']:
@@ -83,6 +84,7 @@ def process_dict(responsedict):
             raise NameError("Non-less or greater in comparison")
     return responsedict
 
+
 def find_stockcode(wolfdict):
     if isinstance(wolfdict, dict):
         for item in wolfdict.values():
@@ -100,6 +102,7 @@ def find_stockcode(wolfdict):
         if len(searched) == 1:
             return searched[0], True
     return None, False
+
 
 if __name__ == "__main__":
     rawin = ""
