@@ -35,6 +35,8 @@ def parse_message(msg, clients):
         ]
     fin = dict((x, y) for x, y in tupform)
     if 'stock' not in fin:
+        if 'utils' in fin:
+            return fin
         if 'name' in fin and len(fin['name']) == 1:
             wolres = wolfstance.query(fin['name'])
             try:
@@ -45,9 +47,9 @@ def parse_message(msg, clients):
             except KeyError:
                 pass
         else:
-            stock = re.findall('\$([A-Z](?:[^ ]){2,9})', msg)
+            stock = re.findall('([A-Z](?:[^ a-z]){2,9})', msg)
             if len(stock) != 1:
-                print(fin)
+                print(stock)
                 raise KeyError('failed to identify stock name!')
             else:
                 fin['stock'] = stock[0]
