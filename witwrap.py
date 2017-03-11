@@ -37,7 +37,6 @@ def parse_message(msg, clients):
     fin = defaultdict(list)
     for (x, y) in tupform:
         fin[x].append(y)
-    #fin = dict((x, y) for x, y in tupform)
     if 'stock' not in fin:
         if 'utils' in fin:
             return fin
@@ -61,6 +60,33 @@ def parse_message(msg, clients):
         del fin['currency']
     return fin
 
+def process_dict(responsedict):
+    print("Log")
+    if 'comparison' in responsedict:
+        print("Bog")
+        if "less" in responsedict['comparison']:
+            print("Fog")
+            for (x, y) in responsedict.items():
+                print("sog")
+                if x != "comparison":
+                    print("yog")
+                    if len(y) == 2:
+                        print("grog")
+                        responsedict['lesser'].append(y[0])
+                        responsedict['greater'].append(y[1])
+            del responsedict['comparison']
+        elif "greater" in responsedict['comparison']:
+            for (x, y) in responsedict.items():
+                if x != "comparison":
+                    if len(y) == 2:
+                        responsedict['greater'].append(y[0])
+                        responsedict['lesser'].append(y[1])
+            del responsedict['comparison']
+        else:
+            raise NameError("Non-less or greater in comparison")
+    else:
+        print("yo gabba gabba")
+    return responsedict
 
 def find_stockcode(wolfdict):
     if isinstance(wolfdict, dict):
@@ -86,7 +112,9 @@ if __name__ == "__main__":
     while (rawin != "exit"):
         rawin = raw_input(">>>")
         try:
-            print(parse_message(rawin, z))
+            x = (parse_message(rawin, z))
+            print(x)
+            print(process_dict(x))
         except Exception as e:
             print(str(e))
             pass
