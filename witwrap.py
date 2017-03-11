@@ -1,11 +1,11 @@
 import os
 import re
-import wolframalpha
 from collections import defaultdict
+
+import wolframalpha
 from wit import Wit
 
 wolfsearch = re.compile('\(([A-Z]{2}(?:[^) ]){1,8})\)')
-
 
 
 def configure_wit(actions=None):
@@ -36,8 +36,8 @@ def parse_message(msg, clients):
         for dic in dicts
         ]
     fin = defaultdict(list)
-    for (x, y) in tupform:
-        fin[x].append(y)
+    for (r, y) in tupform:
+        fin[r].append(y)
     if 'stock' not in fin:
         if 'utils' in fin:
             return fin
@@ -53,35 +53,56 @@ def parse_message(msg, clients):
         else:
             stock = re.findall('([A-Z](?:[^ a-z]){2,9})', msg)
             if len(stock) != 1:
-                print(stock)
-                raise KeyError('failed to identify stock name!')
+                company_name = re.findall('^.+ .?([A-Z][a-z]+)(?= )', msg)
+                if len(company_name) != 1:
+                    raise KeyError('failed to identify stock name!')
+                else:
+                    wolfresponse = wolfstance.query(company_name[0])
+                    wolfproc = find_stockcode(wolfresponse)
+                    if wolfproc[1]:
+                        fin['stock'].append(wolfproc[0])
+                    else:
+                        raise KeyError('failed to identify stock name!')
             else:
                 fin['stock'] = stock[0]
     if 'currency' in fin and 'percent' in fin:
         del fin['currency']
+    if 'average' in fin['metric']:
+        fin['metric'] = ['simple moving average']
     return fin
+
+
+def dedictify(responsedict):
+    returndict = {}
+    for (k, v) in responsedict.items():
+        if len(v) == 1:
+            returndict[k] = v[0]
+        else:
+            raise IndexError("Too many objects")
+    return returndict
 
 def process_dict(responsedict):
     if 'comparison' in responsedict:
         if "less" in responsedict['comparison']:
-            for (x, y) in responsedict.items():
-                if x != "comparison":
+            for (s, y) in responsedict.items():
+                if s != "comparison":
                     if len(y) == 2:
                         responsedict['lesser'].append(y[0])
                         responsedict['greater'].append(y[1])
                         del responsedict[x]
             del responsedict['comparison']
         elif "greater" in responsedict['comparison']:
-            for (x, y) in responsedict.items():
-                if x != "comparison":
+            for (t, y) in responsedict.items():
+                if t != "comparison":
                     if len(y) == 2:
                         responsedict['greater'].append(y[0])
                         responsedict['lesser'].append(y[1])
-                        del responsedict[x]
+                        del responsedict[t]
             del responsedict['comparison']
         else:
             raise NameError("Non-less or greater in comparison")
     return responsedict
+
 
 def find_stockcode(wolfdict):
     if isinstance(wolfdict, dict):
@@ -101,10 +122,11 @@ def find_stockcode(wolfdict):
             return searched[0], True
     return None, False
 
+
 if __name__ == "__main__":
     rawin = ""
     z = configure_wit()
-    while (rawin != "exit"):
+    while rawin != "exit":
         rawin = raw_input(">>>")
         try:
             x = (parse_message(rawin, z))
