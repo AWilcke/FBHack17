@@ -67,7 +67,7 @@ def webhook():
 @app.route('/notify', methods=['POST'])
 def notifyhook():
 
-    data = request.get_json()
+    data = request.json()
     
     log(data)
     # send_message(data['u_id'], data['notif'])
