@@ -75,11 +75,12 @@ def webhook():
                         s = "%s %s" % (wit_out['stock'], wit_out['metric'])
 
                         wit_out['metric'] = key_to_lang(wit_out['metric'])
-                        if not wit_out.has_key('number'):
-                            wit_out['number'] = 10
+                        if (wit_out['metric'] == 'move' or wit_out['metric'] == 'weight'):
+                            if not wit_out.has_key('number'):
+                                wit_out['number'] = 10
+                            s += " over %s days" % (wit_out['number'])
+                            wit_out['metric'] += str(wit_out['number'])
 
-                        s += " over %s days" % (wit_out['number'])
-                        wit_out['metric'] += wit_out['number']
 
                         log(wit_out)
 
