@@ -71,13 +71,21 @@ def webhook():
                                 data=wit_out, verify=False).json()
                         send_message(sender_id, "You have %s alerts. For more info, visit %s" % (r['num'],r["url"]))
 
-                    elif wit_out.has_key('stock') and wit_out.has_key('average'):
+                    elif wit_out.has_key('stock') and wit_out.has_key('metric'):
+                        s = "%s %s" % (wit_out['stock'], wit_out['metric'])
+
+                        wit_out['metric'] = key_to_lang(wit_out['metric'])
+                        if not wit_out.has_key('number'):
+                            wit_out['number'] = 10
+
+                        s += " over %s days" % (wit_out['number'])
+                        wit_out['metric'] += wit_out['number']
+
+                        log(wit_out)
+
                         r = requests.post("http://www.anyonetrades.com/api/get_info.php", 
                                 data=wit_out, verify=False).text
 
-                        s = "%s %s" % (wit_out['stock'], wit_out['average'])
-                        if wit_out.has_key('number'):
-                            s += " over %s days" % (wit_out['number'])
                         s += " is %s" % (r)
                         send_message(sender_id, s)
 
@@ -145,10 +153,17 @@ def send_message(recipient_id, message_text):
         log(r.text)
 
 
+def key_to_lang(key):
+    if key == 'weighted moving average':
+        return 'weight'
+    elif key == 'simple moving average':
+        return 'move'
+    else:
+        return ''
+
 def log(message):  # simple wrapper for logging to stdout on heroku
     print str(message)
     sys.stdout.flush()
-
 
 if __name__ == '__main__':
     app.run(debug=True)
