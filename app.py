@@ -160,7 +160,7 @@ def key_to_lang(key):
     elif key == 'simple moving average':
         return 'move'
     else:
-        return ''
+        return key
 
 def log(message):  # simple wrapper for logging to stdout on heroku
     print str(message)
