@@ -29,8 +29,6 @@ def webhook():
     # endpoint for processing incoming messaging events
 
     data = request.get_json()
-    log(data)  # you may not want to log every incoming message in production, but it's good for testing
-
     if data["object"] == "page":
 
         for entry in data["entry"]:
@@ -71,7 +69,8 @@ def notifyhook():
 
     data = request.get_json()
     
-    send_message(data['u_id'], data['notif'])
+    log(data)
+    # send_message(data['u_id'], data['notif'])
 
     return "ok", 200
     
