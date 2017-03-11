@@ -9,8 +9,6 @@ from witwrap import configure_wit
 app = Flask(__name__)
 w = configure_wit()
 
-
-
 @app.route('/', methods=['GET'])
 def verify():
     # when the endpoint is registered as a webhook, it must echo back
@@ -29,8 +27,6 @@ def webhook():
     # endpoint for processing incoming messaging events
 
     data = request.get_json()
-    log(data)  # you may not want to log every incoming message in production, but it's good for testing
-
     if data["object"] == "page":
 
         for entry in data["entry"]:
@@ -39,7 +35,13 @@ def webhook():
                 if messaging_event.get("message"):  # someone sent us a message
 
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
-                    message_text = messaging_event["message"]["text"]  # the message's text
+                    try:
+                        message_text = messaging_event["message"]["text"]  # the message's text
+                    except:
+                        send_message(sender_id, "Sorry, this format is not supported.")
+                        return "ok", 200
+
+                    log("Received message from %s with content: %s" % (sender_id, message_text))
 
                     '''
                     # need to send text to wit
@@ -69,8 +71,9 @@ def webhook():
 @app.route('/notify', methods=['POST'])
 def notifyhook():
 
-    data = request.get_json()
+    data = request.json
     
+    log(data)
     send_message(data['u_id'], data['notif'])
 
     return "ok", 200
