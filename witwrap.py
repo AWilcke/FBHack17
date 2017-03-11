@@ -65,3 +65,14 @@ def find_stockcode(wolfdict):
         if len(searched) == 1:
             return (searched[0], True)
     return (None, False)
+
+if __name__ == "__main__":
+    rawin = ""
+    z = configure_wit()
+    while (rawin != "exit"):
+        rawin = raw_input(">>>")
+        try:
+            print(parse_message(rawin, z))
+        except Exception as e: 
+            print(str(e))
+            pass
