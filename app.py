@@ -63,7 +63,7 @@ def webhook():
                     if wit_out.has_key('change'):
                         # then send the output to php db
                         r = requests.post("http://www.anyonetrades.com/api/create_alert.php", 
-                                data=wit_out, verify=False)
+                                data=wit_out, verify=False).json()
                         send_message(sender_id, "Subscribed you to %s" % "test")
 
                     elif wit_out.has_key('utils'):
@@ -71,10 +71,15 @@ def webhook():
                                 data=wit_out, verify=False).json()
                         send_message(sender_id, "You have %s alerts. For more info, visit %s" % (r['num'],r["url"]))
 
-                    elif wit_out.has_key('stock'):
+                    elif wit_out.has_key('stock') and wit_out.has_key('average'):
                         r = requests.post("http://www.anyonetrades.com/api/get_info.php", 
-                                data=wit_out, verify=False)
-                        send_message(sender_id, "placeholder %s" % ("url"))
+                                data=wit_out, verify=False).text
+
+                        s = "%s %s" % (wit_out['stock'], wit_out['average'])
+                        if wit_out.has_key('number'):
+                            s += " over %s days" % (wit_out['number'])
+                        s += " is %s" % (r)
+                        send_message(sender_id, s)
 
                     else:
                         send_message(sender_id, "Sorry, couldnt quite figure that out, would you mind rephrasing?")
@@ -85,11 +90,36 @@ def webhook():
 def notifyhook():
 
     data = request.json
-    
-    log(data)
     send_message(data['u_id'], data['notif'])
+    return "ok", 200
+
+@app.route('/update', methods=['POST'])
+def updatehook():
+
+    data = request.json
+
+    sender_id = data["u_id"]        # the facebook ID of the person sending you the message
+    message_text = data["query"]  # the message's text
+
+    # need to send text to wit
+    wit_out = parse_message(message_text, w)
+
+    log(wit_out)
+
+    wit_out['password'] = os.environ["PHPPASSWORD"]
+
+    if wit_out.has_key('change'):
+        # then send the output to php db
+        r = requests.post("http://www.anyonetrades.com/api/create_alert.php", 
+                data=wit_out, verify=False).json()
+        send_message(sender_id, "Subscribed you to %s" % r)
+
+    else:
+        return "Failed", 400
 
     return "ok", 200
+
+
     
 def send_message(recipient_id, message_text):
 
