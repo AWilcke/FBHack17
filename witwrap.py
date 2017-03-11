@@ -5,8 +5,6 @@ from wit import Wit
 
 wolfsearch = re.compile('\(([A-Z]{2}(?:[^) ]){1,8})\)')
 
-def get_samples():
-    return (sample, wolfsample, wolfapple)
 
 def configure_wit(actions={}):
     wit_key = os.environ.get('WIT_KEY')
@@ -18,15 +16,6 @@ def configure_wit(actions={}):
         return (wit_here, None)
     wolfram = wolframalpha.Client(wolf_key)
     return (wit_here, wolfram)
-
-def test_pm():
-    response = sample['entities']
-    tupform = [
-    (key, dict['value']) for 
-        (dicts,key) in [(response[key],key) for key in response] 
-    for dict in dicts
-    ]
-    return dict((x, y) for x, y in tupform)
 
 def wolfram_whole_request(request):
     (wit, wolf) = configure_wit()
@@ -76,7 +65,3 @@ def find_stockcode(wolfdict):
         if len(searched) == 1:
             return (searched[0], True)
     return (None, False)
-
-if __name__ == "__main__":
-    (first, second, third) = get_samples()
-    print(find_stockcode(second))
