@@ -9,8 +9,6 @@ from witwrap import configure_wit
 app = Flask(__name__)
 w = configure_wit()
 
-
-
 @app.route('/', methods=['GET'])
 def verify():
     # when the endpoint is registered as a webhook, it must echo back
