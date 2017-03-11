@@ -4,7 +4,7 @@ import json
 
 import requests
 from flask import Flask, request
-from witwrap import configure_wit
+from witwrap import configure_wit, parse_message
 
 app = Flask(__name__)
 w = configure_wit()
@@ -43,28 +43,41 @@ def webhook():
 
                     log("Received message from %s with content: %s" % (sender_id, message_text))
 
-                    '''
                     # need to send text to wit
+                    '''
                     wit_out ={
                             'u_id':"12341234123412341234",
                             'stock':"GOOG",
                             'a':"day-high",
                             'b':"52-week-average",
                             'b_type':"variable",
-                            'request':"create_alert"
                             }
-                    
-                    # log(wit_out)
-                    # finally send confirmation message
-                    wit_out['password'] = os.environ["PHPPASSWORD"]
-                    # the send the output to php db
-                    r = requests.post("http://www.anyonetrades.com/api.php", data=wit_out, verify=False)
-                    log(r)
                     '''
-                    send_message(sender_id, "Subscribed you to %s" % "test")
 
-                if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
-                    pass
+                    wit_out = parse_message(message_text, w)
+
+                    log(wit_out)
+
+                    wit_out['password'] = os.environ["PHPPASSWORD"]
+
+                    if wit_out.has_key('change'):
+                        # then send the output to php db
+                        r = requests.post("http://www.anyonetrades.com/api/create_alert.php", 
+                                data=wit_out, verify=False)
+                        send_message(sender_id, "Subscribed you to %s" % "test")
+
+                    elif wit_out.has_key('utils'):
+                        r = requests.post("http://www.anyonetrades.com/api/get_alerts.php", 
+                                data=wit_out, verify=False).json()
+                        send_message(sender_id, "You have %d alerts. For more info, visit %s" % (r['num'],r["url"]))
+
+                    elif wit_out.has_key('stock'):
+                        r = requests.post("http://www.anyonetrades.com/api/get_info.php", 
+                                data=wit_out, verify=False)
+                        send_message(sender_id, "placeholder %s" % ("url"))
+
+                    else:
+                        send_message(sender_id, "Sorry, couldnt quite figure that out, would you mind rephrasing?")
 
     return "ok", 200
 
