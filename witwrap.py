@@ -38,6 +38,7 @@ def parse_message(msg, clients):
     fin = defaultdict(list)
     for (x, y) in tupform:
         fin[x].append(y)
+    fin = ["simple moving average" if val == "metric" else val for val in fin['metric']]
     if 'stock' not in fin:
         if 'utils' in fin:
             return fin
