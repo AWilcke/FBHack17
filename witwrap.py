@@ -36,9 +36,8 @@ def parse_message(msg, clients):
         for dic in dicts
         ]
     fin = defaultdict(list)
-    for (x, y) in tupform:
-        fin[x].append(y)
-    fin = ["simple moving average" if val == "metric" else val for val in fin['metric']]
+    for (r, y) in tupform:
+        fin[r].append(y)
     if 'stock' not in fin:
         if 'utils' in fin:
             return fin
@@ -68,26 +67,37 @@ def parse_message(msg, clients):
                 fin['stock'] = stock[0]
     if 'currency' in fin and 'percent' in fin:
         del fin['currency']
+    if 'average' in fin['metric']:
+        fin['metric'] = ['simple moving average']
     return fin
 
+
+def dedictify(responsedict):
+    returndict = {}
+    for (k, v) in responsedict.items():
+        if len(v) == 1:
+            returndict[k] = v[0]
+        else:
+            raise IndexError("Too many objects")
+    return returndict
 
 def process_dict(responsedict):
     if 'comparison' in responsedict:
         if "less" in responsedict['comparison']:
-            for (x, y) in responsedict.items():
-                if x != "comparison":
+            for (s, y) in responsedict.items():
+                if s != "comparison":
                     if len(y) == 2:
                         responsedict['lesser'].append(y[0])
                         responsedict['greater'].append(y[1])
                         del responsedict[x]
             del responsedict['comparison']
         elif "greater" in responsedict['comparison']:
-            for (x, y) in responsedict.items():
-                if x != "comparison":
+            for (t, y) in responsedict.items():
+                if t != "comparison":
                     if len(y) == 2:
                         responsedict['greater'].append(y[0])
                         responsedict['lesser'].append(y[1])
-                        del responsedict[x]
+                        del responsedict[t]
             del responsedict['comparison']
         else:
             raise NameError("Non-less or greater in comparison")
@@ -116,7 +126,7 @@ def find_stockcode(wolfdict):
 if __name__ == "__main__":
     rawin = ""
     z = configure_wit()
-    while (rawin != "exit"):
+    while rawin != "exit":
         rawin = raw_input(">>>")
         try:
             x = (parse_message(rawin, z))
