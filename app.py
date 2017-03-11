@@ -70,7 +70,7 @@ def notifyhook():
     data = request.json
     
     log(data)
-    # send_message(data['u_id'], data['notif'])
+    send_message(data['u_id'], data['notif'])
 
     return "ok", 200
     
