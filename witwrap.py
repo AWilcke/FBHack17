@@ -60,7 +60,7 @@ def parse_message(msg, clients):
                     wolfresponse = wolfstance.query(company_name[0])
                     wolfproc = find_stockcode(wolfresponse)
                     if wolfproc[1]:
-                        fin['stock'] = wolfproc[0]
+                        fin['stock'].append(wolfproc[0])
                     else:
                         raise KeyError('failed to identify stock name!')
             else:
