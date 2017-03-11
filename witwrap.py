@@ -1,6 +1,7 @@
 import os
 import re
 import wolframalpha
+from collections import defaultdict
 from wit import Wit
 
 wolfsearch = re.compile('\(([A-Z]{2}(?:[^) ]){1,8})\)')
@@ -34,7 +35,10 @@ def parse_message(msg, clients):
         for dic in dicts
         ]
     print(tupform)
-    fin = dict((x, y) for x, y in tupform)
+    fin = defaultdict(list)
+    for (x,y) in tupform:
+        fin[x].append(y)
+    #fin = dict((x, y) for x, y in tupform)
     if 'stock' not in fin:
         if 'utils' in fin:
             return fin
