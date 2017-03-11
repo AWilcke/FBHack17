@@ -82,5 +82,5 @@ def find_stockcode(wolfdict):
     return (None, False)
 
 if __name__ == "__main__":
-    (a,b,c) = get_samples()
-    print(find_stockcode(b))
+    (first, second, third) = get_samples()
+    print(find_stockcode(second))
