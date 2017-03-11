@@ -69,7 +69,7 @@ def webhook():
                     elif wit_out.has_key('utils'):
                         r = requests.post("http://www.anyonetrades.com/api/get_alerts.php", 
                                 data=wit_out, verify=False).json()
-                        send_message(sender_id, "You have %d alerts. For more info, visit %s" % (r['num'],r["url"]))
+                        send_message(sender_id, "You have %s alerts. For more info, visit %s" % (r['num'],r["url"]))
 
                     elif wit_out.has_key('stock'):
                         r = requests.post("http://www.anyonetrades.com/api/get_info.php", 
