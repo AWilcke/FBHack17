@@ -37,6 +37,8 @@ def parse_message(msg, witstance):
             raise KeyError('failed to identify stock name!')
         else:
             fin['stock'] = stock[0]
+    if 'currency' in fin and 'percent' in fin:
+        del fin['currency']
     return fin
 
 if __name__ == "__main__":
