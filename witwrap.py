@@ -32,7 +32,7 @@ def parse_message(msg, witstance):
     ]
     fin = dict((x, y) for x, y in tupform)
     if 'stock' not in fin:
-        stock = re.findall('\$([^ ]{3,10})', fin)
+        stock = re.findall('\$([A-Z](?:[^ ]){2,9})', msg)
         if len(stock) != 1:
             raise KeyError('failed to identify stock name!')
         else:
