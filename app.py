@@ -39,7 +39,7 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    log("Received message from %s with content: %s" % sender_id, message_text)_
+                    log("Received message from %s with content: %s" % (sender_id, message_text))
 
                     '''
                     # need to send text to wit
