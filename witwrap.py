@@ -47,6 +47,7 @@ def parse_message(msg, clients):
         else:
             stock = re.findall('\$([A-Z](?:[^ ]){2,9})', msg)
             if len(stock) != 1:
+                print(fin)
                 raise KeyError('failed to identify stock name!')
             else:
                 fin['stock'] = stock[0]
