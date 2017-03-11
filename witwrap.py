@@ -59,9 +59,6 @@ def parse_message(msg, clients):
                 fin['stock'] = stock[0]
     if 'currency' in fin and 'percent' in fin:
         del fin['currency']
-    if 'average' in fin:
-        for q in fin['average']:
-            fin['simple moving average'].append(q)
     return fin
 
 
