@@ -37,7 +37,11 @@ def webhook():
                 if messaging_event.get("message"):  # someone sent us a message
 
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
-                    message_text = messaging_event["message"]["text"]  # the message's text
+                    try:
+                        message_text = messaging_event["message"]["text"]  # the message's text
+                    except:
+                        send_message(sender_id, "Sorry, this format is not supported.")
+                        return "ok", 200
 
                     log("Received message from %s with content: %s" % (sender_id, message_text))
 
