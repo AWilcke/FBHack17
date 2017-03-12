@@ -3,11 +3,11 @@ import os
 import re
 from collections import defaultdict
 
-import six.input as input
 import wolframalpha
 from wit import Wit
 
 wolfsearch = re.compile('\(([A-Z]{2}(?:[^) ]){1,8})\)')
+real_raw_input = vars(__builtins__).get('raw_input', input)
 
 
 def configure_wit(actions=None):
@@ -138,7 +138,7 @@ if __name__ == "__main__":
     rawin = ""
     z = configure_wit()
     while rawin != "exit":
-        rawin = input(">>>")
+        rawin = real_raw_input(">>>")
         try:
             x = (parse_message(rawin, z))
             print(x)
