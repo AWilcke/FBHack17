@@ -64,7 +64,7 @@ def webhook():
 
                         # metric was specified
                         if wit_out.has_key('metric'):
-                            wit_out['a'] = key_to_lang(wit_out.pop(wit_out['metric']))
+                            wit_out['a'] = key_to_lang(wit_out.pop('metric'))
                             
                             # if needs time, add it
                             if wit_out['a'] == 'move' or wit_out['a'] == 'weight':
