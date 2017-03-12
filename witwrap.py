@@ -101,7 +101,7 @@ def process_dict(responsedict):
             del responsedict['comparison']
         else:
             raise NameError("Non-less or greater in comparison")
-    if len(responsedict['lesser']) == 1:
+    if len(responsedict['lesser']) == 1 and responsedict['lesser'] != []:
         if 'metric' in responsedict:
             responsedict['lesser'] = [responsedict['metric'][0]] + responsedict['lesser']
             responsedict['greater'] = [responsedict['metric'][0]] + responsedict['greater']
