@@ -44,12 +44,10 @@ def webhook():
                     # get output from wit.ai
                     try:
                         wit_out = parse_message(message_text, w)
+                    except KeyError:
+                        send_message(sender_id, "I could not find a stock with that name.")
+                        return "ok", 200
                     except:
-                        _, e, _ = sys.exc_info()
-                        log(str(e))
-                        if str(e) == 'failed to identify stock name!':
-                            send_message(sender_id, "I could not find a stock with that name.")
-                            return "ok", 200
                         send_message(sender_id, "Sorry, couldnt quite figure that out, would you mind rephrasing?")
                         return "ok", 200
 
