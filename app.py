@@ -139,8 +139,7 @@ def webhook():
                                 wit_out['number'] = 10
                             s += " over %s days" % (wit_out['number'])
                             wit_out['metric'] += str(wit_out['number'])
-
-                        del wit_out['number']
+                            del wit_out['number']
 
                         log(wit_out)
 
