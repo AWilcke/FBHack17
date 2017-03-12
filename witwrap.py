@@ -8,7 +8,7 @@ from wit import Wit
 
 global kill
 
-wolfsearch = re.compile('\(([A-Z]{2}(?:[^) ]){1,8})\)')
+wolfsearch = re.compile('\(([A-Z]{2}(?:[^) ]){0,7})\)')
 
 try:
     real_raw_input = vars(__builtins__).get('raw_input', input)
@@ -53,7 +53,7 @@ def parse_message(msg, clients):
         if 'utils' in fin:
             return fin
         if 'name' in fin and len(fin['name']) == 1:
-            wolres = wolfstance.query(fin['name'])
+            wolres = wolfstance.query(fin['name'] + " stock")
             try:
                 wolparse = wolres['pod'][0]['subpod']['plaintext']
                 stock = re.findall('([A-Z]{2}(?:[^) ]){1,8})', wolparse)
@@ -68,7 +68,7 @@ def parse_message(msg, clients):
                 if len(company_name) != 1:
                     raise KeyError('failed to identify stock name!')
                 else:
-                    wolfresponse = wolfstance.query(company_name[0])
+                    wolfresponse = wolfstance.query(company_name[0] + " stock")
                     wolfproc = find_stockcode(wolfresponse)
                     if wolfproc[1]:
                         fin['stock'].append(wolfproc[0])
@@ -164,9 +164,10 @@ def find_stockcode(wolfdict):
             if response[1]:
                 return response
     else:
-        searched = wolfsearch.findall(wolfdict)
-        if len(searched) == 1:
-            return searched[0], True
+        if wolfdict is not None:
+            searched = wolfsearch.findall(wolfdict)
+            if len(searched) == 1:
+                return searched[0], True
     return None, False
 
 
