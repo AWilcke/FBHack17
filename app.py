@@ -164,7 +164,22 @@ def notifyhook():
 @app.route('/update', methods=['POST'])
 def updatehook():
 
-    data = request.json
+    data = request
+
+    try:
+        log(request.json)
+    except:
+        pass
+    
+    try:
+        log(request.get_json())
+    except:
+        pass
+
+    try:
+        log(request.form.get('u_id'))
+    except:
+        return "Failed", 400
 
     sender_id = data["u_id"]        # the facebook ID of the person sending you the message
     message_text = data["query"]  # the message's text
