@@ -144,6 +144,10 @@ def process_dict(responsedict):
     for (k, v) in responsedict.items():
         if not v:
             del responsedict[k]
+    if type(responsedict['lesser']) is list:
+        responsedict['lesser'] = sorted(responsedict['lesser'], reverse=True)
+    if type(responsedict['greater']) is list:
+        responsedict['greater'] = sorted(responsedict['greater'], reverse=True)
     return responsedict
 
 
