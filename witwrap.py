@@ -6,6 +6,7 @@ from collections import defaultdict
 import wolframalpha
 from wit import Wit
 
+global kill
 
 wolfsearch = re.compile('\(([A-Z]{2}(?:[^) ]){1,8})\)')
 
@@ -46,9 +47,8 @@ def parse_message(msg, clients):
     fin = defaultdict(list)
     for (r, y) in tupform:
         fin[r].append(y)
-    #print(fin)
     if 'average' in fin['metric']:
-        fin['metric'] = ['simple moving average' for z in fin['metric'] if z == "average"]
+        fin['metric'] = ['simple moving average' if z == "average" else z for z in fin['metric'] ]
     if 'stock' not in fin:
         if 'utils' in fin:
             return fin
@@ -80,6 +80,8 @@ def parse_message(msg, clients):
     if 'currency' in fin and 'percent' in fin:
         del fin['currency']
     #print(fin)
+    global kill
+    kill = msg
     return dedictify(process_dict(fin))
 
 
@@ -94,6 +96,7 @@ def dedictify(responsedict):
 
 
 def process_dict(responsedict):
+    global kill
     if 'comparison' in responsedict:
         if "less" in responsedict['comparison']:
             for (s, y) in responsedict.items():
@@ -104,8 +107,13 @@ def process_dict(responsedict):
                         del responsedict[s]
             del responsedict['comparison']
             if 'number' in responsedict:
-                if responsedict['number']:
-                    raise TypeError("Unreachable error")
+                if len(responsedict['number']) == 1:
+                    loc = kill.find(str(responsedict['number'][0]))
+                    if loc > int(len(kill) / 2):
+                        responsedict['greater'].append(responsedict['number'][0])
+                    else:
+                        responsedict['lesser'].append(responsedict['number'][0])
+                    del responsedict['number']
         elif "greater" in responsedict['comparison']:
             for (t, y) in responsedict.items():
                 if t != "comparison":
@@ -114,6 +122,14 @@ def process_dict(responsedict):
                         responsedict['lesser'].append(y[1])
                         del responsedict[t]
             del responsedict['comparison']
+            if 'number' in responsedict:
+                if len(responsedict['number']) == 1:
+                    loc = kill.find(str(responsedict['number'][0]))
+                    if loc > int(len(kill) / 2):
+                        responsedict['lesser'].append(responsedict['number'][0])
+                    else:
+                        responsedict['greater'].append(responsedict['number'][0])
+                    del responsedict['number']
         else:
             raise NameError("Non-less or greater in comparison")
     if len(responsedict['lesser']) == 1 and responsedict['lesser'] != []:
@@ -151,9 +167,10 @@ if __name__ == "__main__":
     z = configure_wit()
     while rawin != "exit":
         rawin = real_raw_input(">>>")
-        try:
-            x = (parse_message(rawin, z))
-            print(x)
-        except Exception as e:
-            print(str(e))
-            pass
+        #try:
+        x = (parse_message(rawin, z))
+        print(x)
+        #except Exception as e:
+        #    print(str(e))
+        #    pass
+#
