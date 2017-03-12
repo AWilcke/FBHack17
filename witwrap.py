@@ -103,9 +103,9 @@ def process_dict(responsedict):
             raise NameError("Non-less or greater in comparison")
     if len(responsedict['lesser']) == 1:
         if 'metric' in responsedict:
-            responsedict['lesser'].append(responsedict['metric'][0])
-            responsedict['greater'].append(responsedict['metric'][0])
-            del responsedict['greater']
+            responsedict['lesser'] = [responsedict['metric'][0]] + responsedict['lesser']
+            responsedict['greater'] = [responsedict['metric'][0]] + responsedict['greater']
+            del responsedict['metric']
     return responsedict
 
 
@@ -133,9 +133,9 @@ if __name__ == "__main__":
     z = configure_wit()
     while rawin != "exit":
         rawin = raw_input(">>>")
-#        try:
-        x = (parse_message(rawin, z))
-        print(x)
-#        except Exception as e:
-#            print(str(e))
-#            pass
+        try:
+            x = (parse_message(rawin, z))
+            print(x)
+        except Exception as e:
+            print(str(e))
+            pass
