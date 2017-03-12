@@ -3,7 +3,7 @@ import os
 import re
 from collections import defaultdict
 
-import six
+import six.input as input
 import wolframalpha
 from wit import Wit
 
@@ -138,11 +138,7 @@ if __name__ == "__main__":
     rawin = ""
     z = configure_wit()
     while rawin != "exit":
-        if six.PY2:
-            # noinspection PyCompatibility
-            rawin = raw_input(">>>")
-        else:
-            rawin = input(">>>")
+        rawin = input(">>>")
         try:
             x = (parse_message(rawin, z))
             print(x)
