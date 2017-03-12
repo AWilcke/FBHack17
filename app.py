@@ -59,12 +59,15 @@ def webhook():
                     if wit_out.has_key('change'):
                         
                         if wit_out.has_key('percent'):
+                            del wit_out['percent']
                             wit_out['type'] = 'percent'
 
                         elif wit_out['change'] == 'reaches':
+                            del wit_out['change']
                             wit_out['type'] = 'absolute'
 
                         elif wit_out['change'] == 'up' or wit_out['change'] == 'down':
+                            del wit_out['change']
                             wit_out['type'] = 'relative'
 
                         # metric was specified
@@ -85,6 +88,8 @@ def webhook():
                         else:
                             wit_out['b'] = wit_out.pop('number')
 
+                        del wit_out['number']
+
                         log(wit_out)
 
                         r = requests.post("http://www.anyonetrades.com/api/create_alert.php", 
@@ -104,6 +109,9 @@ def webhook():
                             wit_out['b'] = key_to_lang(wit_out['lesser'][0]) + str(wit_out['lesser'][1])
                         else:
                             wit_out['b'] = key_to_lang(wit_out['lesser']) + '10'
+
+                        del wit_out['lesser']
+                        del wit_out['greater']
 
                         log(wit_out)
 
@@ -132,6 +140,7 @@ def webhook():
                             s += " over %s days" % (wit_out['number'])
                             wit_out['metric'] += str(wit_out['number'])
 
+                        del wit_out['number']
 
                         log(wit_out)
 
