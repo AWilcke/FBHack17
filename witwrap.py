@@ -6,8 +6,13 @@ from collections import defaultdict
 import wolframalpha
 from wit import Wit
 
+
 wolfsearch = re.compile('\(([A-Z]{2}(?:[^) ]){1,8})\)')
-real_raw_input = vars(__builtins__).get('raw_input', input)
+
+try:
+    real_raw_input = vars(__builtins__).get('raw_input', input)
+except TypeError:
+    pass
 
 
 def configure_wit(actions=None):
@@ -30,6 +35,7 @@ def wolfram_whole_request(request):
 
 
 def parse_message(msg, clients):
+    
     (witstance, wolfstance) = clients
     response = witstance.message(msg)['entities']
     tupform = [
@@ -40,6 +46,9 @@ def parse_message(msg, clients):
     fin = defaultdict(list)
     for (r, y) in tupform:
         fin[r].append(y)
+    #print(fin)
+    if 'average' in fin['metric']:
+        fin['metric'] = ['simple moving average' for z in fin['metric'] if z == "average"]
     if 'stock' not in fin:
         if 'utils' in fin:
             return fin
@@ -67,10 +76,10 @@ def parse_message(msg, clients):
                         raise KeyError('failed to identify stock name!')
             else:
                 fin['stock'] = stock[0]
+    #print(fin)
     if 'currency' in fin and 'percent' in fin:
         del fin['currency']
-    if 'average' in fin['metric']:
-        fin['metric'] = ['simple moving average']
+    #print(fin)
     return dedictify(process_dict(fin))
 
 
@@ -94,6 +103,9 @@ def process_dict(responsedict):
                         responsedict['greater'].append(y[1])
                         del responsedict[s]
             del responsedict['comparison']
+            if 'number' in responsedict:
+                if responsedict['number']:
+                    raise TypeError("Unreachable error")
         elif "greater" in responsedict['comparison']:
             for (t, y) in responsedict.items():
                 if t != "comparison":
