@@ -41,36 +41,72 @@ def webhook():
                         send_message(sender_id, "Sorry, this format is not supported.")
                         return "ok", 200
 
-                    log("Received message from %s with content: %s" % (sender_id, message_text))
-
-                    # need to send text to wit
-                    '''
-                    wit_out ={
-                            'u_id':"12341234123412341234",
-                            'stock':"GOOG",
-                            'a':"day-high",
-                            'b':"52-week-average",
-                            'b_type':"variable",
-                            }
-                    '''
-
                     wit_out = parse_message(message_text, w)
 
                     log(wit_out)
 
                     wit_out['password'] = os.environ["PHPPASSWORD"]
+                    wit_out['u_id'] = sender_id
 
+                    # adding rule
                     if wit_out.has_key('change'):
-                        # then send the output to php db
-                        r = requests.post("http://www.anyonetrades.com/api/create_alert.php", 
-                                data=wit_out, verify=False).json()
-                        send_message(sender_id, "Subscribed you to %s" % "test")
+                        
+                        if wit_out.has_key('percent'):
+                            wit_out['type'] = 'percent'
 
+                        elif wit_out['change'] == 'reaches':
+                            wit_out['type'] = 'absolute'
+
+                        elif wit_out['change'] == 'up' or wit_out['change'] == 'down':
+                            wit_out['type'] = 'relative'
+
+                        if wit_out.has_key('metric'):
+                            wit_out['a'] = key_to_lang(wit_out.pop(wit_out['metric']))
+                            
+                            # if needs time, add it
+                            if wit_out['a'] == 'move' or wit_out['a'] == 'weight':
+                                if len(wit_out['number'])<2:
+                                    wit_out['a'] += '10'
+                                else:
+                                    wit_out['a'] += str(wit_out['number'][0])
+                        else:
+                            wit_out['a'] = 'value'
+
+                        wit_out['b'] = wit_out['number'][-1]
+
+                        log(wit_out)
+
+                        r = requests.post("http://www.anyonetrades.com/api/create_alert.php", 
+                                data=wit_out, verify=False)
+                        send_message(sender_id, r.text)
+
+                    elif wit_out.has_key('lesser') and wit_out.has_key('greater'):
+                        
+                        wit_out['type'] = 'variables'
+
+                        if type(wit_out['greater']) == list:
+                            wit_out['a'] = key_to_lang(wit_out['greater'][0]) + str(wit_out['greater'][1])
+                        else:
+                            wit_out['a'] = key_to_lang(wit_out['greater']) + '10'
+
+                        if type(wit_out['lesser']) == list:
+                            wit_out['b'] = key_to_lang(wit_out['lesser'][0]) + str(wit_out['lesser'][1])
+                        else:
+                            wit_out['b'] = key_to_lang(wit_out['lesser']) + '10'
+
+                        log(wit_out)
+
+                        r = requests.post("http://www.anyonetrades.com/api/create_alert.php", 
+                                data=wit_out, verify=False)
+                        send_message(sender_id, r.text)
+
+                    # getting stats
                     elif wit_out.has_key('utils'):
                         r = requests.post("http://www.anyonetrades.com/api/get_alerts.php", 
                                 data=wit_out, verify=False).json()
                         send_message(sender_id, "You have %s alerts. For more info, visit %s" % (r['num'],r["url"]))
-
+                    
+                    # querying current values
                     elif wit_out.has_key('stock') and wit_out.has_key('metric'):
                         s = "%s %s" % (wit_out['stock'], wit_out['metric'])
 
