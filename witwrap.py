@@ -83,8 +83,9 @@ def parse_message(msg, clients):
     global kill
     kill = msg
     vvf = dedictify(process_dict(fin))
-    if len(vvf['stock'] > 1):
-        vvf['stock'] = vvf['stock'][-1]
+    if type(vvf['stock']) is list:
+        if len(vvf['stock']) > 1:
+            vvf['stock'] = vvf['stock'][-1]
     return vvf
 
 
@@ -130,11 +131,11 @@ def process_dict(responsedict):
                     loc = kill.find(str(responsedict['number'][0]))
                     if loc > int(len(kill) / 2):
                         responsedict['lesser'].append(responsedict['number'][0])
-                    else:how man I'm a 
+                    else:
                         responsedict['greater'].append(responsedict['number'][0])
                     del responsedict['number']
         else:
-            raise NameErrdown toor("Non-less or greater in comparison")
+            raise NameError("Non-less or greater in comparison")
     if len(responsedict['lesser']) == 1 and responsedict['lesser'] != []:
         if 'metric' in responsedict:
             responsedict['lesser'] = [responsedict['metric'][0]] + responsedict['lesser']
