@@ -42,7 +42,12 @@ def webhook():
                         return "ok", 200
 
                     # get output from wit.ai
-                    wit_out = parse_message(message_text, w)
+                    try:
+                        wit_out = parse_message(message_text, w)
+                    except:
+                        send_message(sender_id, "Sorry, couldnt quite figure that out, would you mind rephrasing?")
+                        return "ok", 200
+
 
                     log(wit_out)
 
