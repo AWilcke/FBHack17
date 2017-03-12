@@ -73,7 +73,7 @@ def parse_message(msg, clients):
                     if wolfproc[1]:
                         fin['stock'].append(wolfproc[0])
                     else:
-                        raise KeyError('failed to identify stock name!')
+                        raise NameError("Name of stock not found in wolfram alpha")
             else:
                 fin['stock'] = stock[0]
     #print(fin)
