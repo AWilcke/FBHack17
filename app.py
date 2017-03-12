@@ -85,10 +85,10 @@ def webhook():
 
                         if type(wit_out['number']) is list:
                             wit_out['b'] = wit_out['number'][-1]
+                            del wit_out['number']
                         else:
                             wit_out['b'] = wit_out.pop('number')
 
-                        del wit_out['number']
 
                         log(wit_out)
 
