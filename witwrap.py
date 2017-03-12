@@ -101,8 +101,10 @@ def dedictify(responsedict):
 
 def process_dict(responsedict):
     global kill
+    less = False
     if 'comparison' in responsedict:
         if "less" in responsedict['comparison']:
+            less = True
             for (s, y) in responsedict.items():
                 if s != "comparison":
                     if len(y) == 2:
@@ -138,8 +140,10 @@ def process_dict(responsedict):
             raise NameError("Non-less or greater in comparison")
     if len(responsedict['lesser']) == 1 and responsedict['lesser'] != []:
         if 'metric' in responsedict:
-            responsedict['lesser'] = [responsedict['metric'][0]] + responsedict['lesser']
-            responsedict['greater'] = [responsedict['metric'][0]] + responsedict['greater']
+            if less:
+                responsedict['lesser'] = [responsedict['metric'][0]] + responsedict['lesser']
+            else:
+                responsedict['greater'] = [responsedict['metric'][0]] + responsedict['greater']
             del responsedict['metric']
     if type(responsedict['lesser']) is list:
         responsedict['lesser'] = sorted(responsedict['lesser'], reverse=True)
