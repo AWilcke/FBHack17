@@ -86,18 +86,21 @@ def webhook():
                             
                             # if needs time, add it
                             if wit_out['a'] == 'move' or wit_out['a'] == 'weight':
-                                if type(wit_out['number']) is list:
+                                if wit_out.has_key('number') and type(wit_out['number']) is list:
                                     wit_out['a'] += str(wit_out['number'][0])
                                 else:
                                     wit_out['a'] += '10'
                         else:
                             wit_out['a'] = 'value'
 
-                        if type(wit_out['number']) is list:
+                        if wit_out.has_key('number') and type(wit_out['number']) is list:
                             wit_out['b'] = wit_out['number'][-1]
                             del wit_out['number']
                         else:
-                            wit_out['b'] = wit_out.pop('number')
+                            try:
+                                wit_out['b'] = wit_out.pop('number')
+                            except:
+                                wit_out['b'] = 0
 
 
                         log(wit_out)
