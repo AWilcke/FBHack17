@@ -107,11 +107,17 @@ def webhook():
 
                         if type(wit_out['greater']) == list:
                             wit_out['a'] = key_to_lang(wit_out['greater'][0]) + str(wit_out['greater'][1])
+                        elif type(wit_out['greater']) == int or type(wit_out['greater']) == float:
+                            wit_out['a'] = wit_out.pop('greater')
+                            wit_out['type'] = 'absolute'
                         else:
                             wit_out['a'] = key_to_lang(wit_out['greater']) + '10'
 
                         if type(wit_out['lesser']) == list:
                             wit_out['b'] = key_to_lang(wit_out['lesser'][0]) + str(wit_out['lesser'][1])
+                        elif type(wit_out['lesser']) == int or type(wit_out['lesser']) == float:
+                            wit_out['b'] = wit_out.pop('lesser')
+                            wit_out['type'] = 'absolute'
                         else:
                             wit_out['b'] = key_to_lang(wit_out['lesser']) + '10'
 
