@@ -170,23 +170,85 @@ def updatehook():
     message_text = data["query"]  # the message's text
 
     # need to send text to wit
-    wit_out = parse_message(message_text, w)
+    try:
+        wit_out = parse_message(message_text, w)
+    except:
+        return "Failed", 400
 
     log(wit_out)
 
+    # add our password and user id to the json
     wit_out['password'] = os.environ["PHPPASSWORD"]
+    wit_out['u_id'] = sender_id
 
+    # adding rule
     if wit_out.has_key('change'):
-        # then send the output to php db
+        
+        if wit_out.has_key('percent'):
+            del wit_out['percent']
+            wit_out['type'] = 'percent'
+
+        elif wit_out['change'] == 'reaches':
+            del wit_out['change']
+            wit_out['type'] = 'absolute'
+
+        elif wit_out['change'] == 'up' or wit_out['change'] == 'down':
+            del wit_out['change']
+            wit_out['type'] = 'relative'
+
+        # metric was specified
+        if wit_out.has_key('metric'):
+            wit_out['a'] = key_to_lang(wit_out.pop('metric'))
+            
+            # if needs time, add it
+            if wit_out['a'] == 'move' or wit_out['a'] == 'weight':
+                if type(wit_out['number']) is list:
+                    wit_out['a'] += str(wit_out['number'][0])
+                else:
+                    wit_out['a'] += '10'
+        else:
+            wit_out['a'] = 'value'
+
+        if type(wit_out['number']) is list:
+            wit_out['b'] = wit_out['number'][-1]
+            del wit_out['number']
+        else:
+            wit_out['b'] = wit_out.pop('number')
+
+
+        log(wit_out)
+
         r = requests.post("http://www.anyonetrades.com/api/create_alert.php", 
-                data=wit_out, verify=False).json()
-        send_message(sender_id, "Subscribed you to %s" % r)
+                data=wit_out, verify=False)
+
+    elif wit_out.has_key('lesser') and wit_out.has_key('greater'):
+        
+        wit_out['type'] = 'variables'
+
+        if type(wit_out['greater']) == list:
+            wit_out['a'] = key_to_lang(wit_out['greater'][0]) + str(wit_out['greater'][1])
+        else:
+            wit_out['a'] = key_to_lang(wit_out['greater']) + '10'
+
+        if type(wit_out['lesser']) == list:
+            wit_out['b'] = key_to_lang(wit_out['lesser'][0]) + str(wit_out['lesser'][1])
+        else:
+            wit_out['b'] = key_to_lang(wit_out['lesser']) + '10'
+
+        del wit_out['lesser']
+        del wit_out['greater']
+
+        log(wit_out)
+
+        r = requests.post("http://www.anyonetrades.com/api/create_alert.php", 
+                data=wit_out, verify=False)
 
     else:
         return "Failed", 400
 
-    return "ok", 200
+    send_message(sender_id, r.text)
 
+    return "ok", 200
 
     
 def send_message(recipient_id, message_text):
