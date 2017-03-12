@@ -167,10 +167,5 @@ if __name__ == "__main__":
     z = configure_wit()
     while rawin != "exit":
         rawin = real_raw_input(">>>")
-        #try:
         x = (parse_message(rawin, z))
         print(x)
-        #except Exception as e:
-        #    print(str(e))
-        #    pass
-#
