@@ -110,7 +110,11 @@ def webhook():
                         send_message(sender_id, "You have %s alerts. For more info, visit %s" % (r['num'],r["url"]))
                     
                     # querying current values
-                    elif wit_out.has_key('stock') and wit_out.has_key('metric'):
+                    elif wit_out.has_key('stock'):
+
+                        if not wit_out.has_key('metric'):
+                            wit_out['metric'] = 'value'
+
                         s = "%s %s" % (wit_out['stock'], wit_out['metric'])
 
                         wit_out['metric'] = key_to_lang(wit_out['metric'])
