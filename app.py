@@ -10,7 +10,7 @@ app = Flask(__name__)
 w = configure_wit()
 
 def exception_handler(e_type, e_str, trace):
-    pass
+    return "ok", 200
 
 sys.excepthook = exception_handler
 
