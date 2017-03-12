@@ -46,6 +46,7 @@ def webhook():
                         wit_out = parse_message(message_text, w)
                     except:
                         _, e, _ = sys.exc_info()
+                        log(str(e))
                         if str(e) == 'failed to identify stock name!':
                             send_message(sender_id, "I could not find a stock with that name.")
                             return "ok", 200
