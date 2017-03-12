@@ -1,3 +1,4 @@
+# coding=utf-8
 import os
 import re
 from collections import defaultdict
@@ -6,6 +7,7 @@ import wolframalpha
 from wit import Wit
 
 wolfsearch = re.compile('\(([A-Z]{2}(?:[^) ]){1,8})\)')
+real_raw_input = vars(__builtins__).get('raw_input', input)
 
 
 def configure_wit(actions=None):
@@ -81,6 +83,7 @@ def dedictify(responsedict):
             returndict[k] = v
     return returndict
 
+
 def process_dict(responsedict):
     if 'comparison' in responsedict:
         if "less" in responsedict['comparison']:
@@ -107,7 +110,7 @@ def process_dict(responsedict):
             responsedict['greater'] = [responsedict['metric'][0]] + responsedict['greater']
             del responsedict['metric']
     for (k, v) in responsedict.items():
-        if v == []:
+        if not v:
             del responsedict[k]
     return responsedict
 
@@ -135,7 +138,7 @@ if __name__ == "__main__":
     rawin = ""
     z = configure_wit()
     while rawin != "exit":
-        rawin = raw_input(">>>")
+        rawin = real_raw_input(">>>")
         try:
             x = (parse_message(rawin, z))
             print(x)
