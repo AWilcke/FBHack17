@@ -9,6 +9,11 @@ from witwrap import configure_wit, parse_message
 app = Flask(__name__)
 w = configure_wit()
 
+def exception_handler(e_type, e_str, trace):
+    pass
+
+sys.excepthook = exception_handler
+
 @app.route('/', methods=['GET'])
 def verify():
     # when the endpoint is registered as a webhook, it must echo back
