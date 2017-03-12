@@ -89,7 +89,7 @@ def process_dict(responsedict):
                     if len(y) == 2:
                         responsedict['lesser'].append(y[0])
                         responsedict['greater'].append(y[1])
-                        del responsedict[x]
+                        del responsedict[s]
             del responsedict['comparison']
         elif "greater" in responsedict['comparison']:
             for (t, y) in responsedict.items():
@@ -133,9 +133,9 @@ if __name__ == "__main__":
     z = configure_wit()
     while rawin != "exit":
         rawin = raw_input(">>>")
-        try:
-            x = (parse_message(rawin, z))
-            print(x)
-        except Exception as e:
-            print(str(e))
-            pass
+#        try:
+        x = (parse_message(rawin, z))
+        print(x)
+#        except Exception as e:
+#            print(str(e))
+#            pass
