@@ -41,10 +41,14 @@ def webhook():
                         send_message(sender_id, "Sorry, this format is not supported.")
                         return "ok", 200
 
+                    if message_text.lower() == "refresh":
+                        requests.post("http://www.anyonetrades.com/api/alerts.php", verify=False)
+                        return "ok", 200
+
                     # get output from wit.ai
                     try:
                         wit_out = parse_message(message_text, w)
-                    except KeyError:
+                    except NameError:
                         send_message(sender_id, "I could not find a stock with that name.")
                         return "ok", 200
                     except:
