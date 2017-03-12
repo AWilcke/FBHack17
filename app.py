@@ -121,9 +121,6 @@ def webhook():
                         else:
                             wit_out['b'] = key_to_lang(wit_out['lesser']) + '10'
 
-                        del wit_out['lesser']
-                        del wit_out['greater']
-
                         log(wit_out)
 
                         r = requests.post("http://www.anyonetrades.com/api/create_alert.php", 
