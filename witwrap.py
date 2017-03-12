@@ -106,7 +106,7 @@ def process_dict(responsedict):
             responsedict['lesser'] = [responsedict['metric'][0]] + responsedict['lesser']
             responsedict['greater'] = [responsedict['metric'][0]] + responsedict['greater']
             del responsedict['metric']
-    for (k, v) in responsedict:
+    for (k, v) in responsedict.items():
         if v == []:
             del responsedict[k]
     return responsedict
