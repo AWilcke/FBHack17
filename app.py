@@ -146,8 +146,11 @@ def webhook():
                         r = requests.post("http://www.anyonetrades.com/api/get_info.php", 
                                 data=wit_out, verify=False).text
 
-                        s += " is %s" % (r)
-                        send_message(sender_id, s)
+                        if r:
+                            s += " is %s" % (r)
+                            send_message(sender_id, s)
+                        else:
+                            send_message(sender_id, "Sorry, I could not find that stock")
 
                     else:
                         send_message(sender_id, "Sorry, couldnt quite figure that out, would you mind rephrasing?")
@@ -157,8 +160,9 @@ def webhook():
 @app.route('/notify', methods=['POST'])
 def notifyhook():
 
-    data = request.json
-    send_message(data['u_id'], data['notif'])
+    u_id = request.form.get('u_id')
+    text = request.form.get('text')
+    send_message(u_id, text)
     return "ok", 200
 
 @app.route('/update', methods=['POST'])
