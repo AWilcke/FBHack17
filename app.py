@@ -63,11 +63,9 @@ def webhook():
                             wit_out['type'] = 'percent'
 
                         elif wit_out['change'] == 'reaches':
-                            del wit_out['change']
                             wit_out['type'] = 'absolute'
 
                         elif wit_out['change'] == 'up' or wit_out['change'] == 'down':
-                            del wit_out['change']
                             wit_out['type'] = 'relative'
 
                         # metric was specified
@@ -192,11 +190,9 @@ def updatehook():
             wit_out['type'] = 'percent'
 
         elif wit_out['change'] == 'reaches':
-            del wit_out['change']
             wit_out['type'] = 'absolute'
 
         elif wit_out['change'] == 'up' or wit_out['change'] == 'down':
-            del wit_out['change']
             wit_out['type'] = 'relative'
 
         # metric was specified
