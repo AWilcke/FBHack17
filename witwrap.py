@@ -1,7 +1,9 @@
+# coding=utf-8
 import os
 import re
 from collections import defaultdict
 
+import six
 import wolframalpha
 from wit import Wit
 
@@ -81,6 +83,7 @@ def dedictify(responsedict):
             returndict[k] = v
     return returndict
 
+
 def process_dict(responsedict):
     if 'comparison' in responsedict:
         if "less" in responsedict['comparison']:
@@ -107,7 +110,7 @@ def process_dict(responsedict):
             responsedict['greater'] = [responsedict['metric'][0]] + responsedict['greater']
             del responsedict['metric']
     for (k, v) in responsedict.items():
-        if v == []:
+        if not v:
             del responsedict[k]
     return responsedict
 
@@ -135,7 +138,11 @@ if __name__ == "__main__":
     rawin = ""
     z = configure_wit()
     while rawin != "exit":
-        rawin = raw_input(">>>")
+        if six.PY2:
+            # noinspection PyCompatibility
+            rawin = raw_input(">>>")
+        else:
+            rawin = input(">>>")
         try:
             x = (parse_message(rawin, z))
             print(x)
