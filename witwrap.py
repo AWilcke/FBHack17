@@ -131,6 +131,6 @@ if __name__ == "__main__":
         try:
             x = (parse_message(rawin, z))
             print(x)
-        except Exception as e:
-            print(str(e))
-            pass
+#        except Exception as e:
+#            print(str(e))
+#            pass
