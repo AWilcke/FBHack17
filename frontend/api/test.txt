@@ -1,0 +1,118 @@
+
+{"change":"down","password":"5QrFz5N2Casjhq3eYDBh9qKk","a":"value","u_id":"1626652780683777","b":"10","type":"percent","stock":"MSFT"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','value','0','0')
+{"change":"down","password":"5QrFz5N2Casjhq3eYDBh9qKk","a":"value","u_id":"1626652780683777","b":"10","type":"percent","stock":"MSFT"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','value','0','1')
+{"a":"value","u_id":"1626652780683777","type":"percent","password":"5QrFz5N2Casjhq3eYDBh9qKk","change":"down","stock":"MSFT","b":"10"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','value','0','1')
+{"a":"value","u_id":"1626652780683777","type":"percent","password":"5QrFz5N2Casjhq3eYDBh9qKk","change":"down","stock":"MSFT","b":"10"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','value','58.437','1')
+{"a":"value","u_id":"1626652780683777","type":"percent","password":"5QrFz5N2Casjhq3eYDBh9qKk","change":"up","stock":"MSFT","b":"20"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','value','77.916','0')
+{"a":"value","currency":"$","u_id":"1626652780683777","type":"relative","password":"5QrFz5N2Casjhq3eYDBh9qKk","change":"up","stock":"MSFT","b":"10"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','value','74.93','0')
+{"a":"value","currency":"$","u_id":"1626652780683777","type":"relative","password":"5QrFz5N2Casjhq3eYDBh9qKk","change":"down","stock":"MSFT","b":"20"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','value','44.93','1')
+{"u_id":"1626652780683777","utils":"statistics","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+{"u_id":"1626652780683777","utils":"statistics","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+{"u_id":"1626652780683777","utils":"dashboard","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+{"metric":"move10","u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB","greater":"10"}
+{"metric":"move10","u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB","greater":"10"}
+{"a":"move10","u_id":"1436522156420482","type":"variables","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB","b":"move30"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1436522156420482','variable','FB','move10','move30','0')
+{"metric":"move10","u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB","greater":"10"}
+{"metric":"move10","u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB","greater":"10"}
+{"a":"move10","u_id":"1436522156420482","type":"variables","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB","b":"move10"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1436522156420482','variable','FB','move10','move10','0')
+{"a":"move10","u_id":"1436522156420482","type":"variables","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB","b":"move15"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1436522156420482','variable','FB','move10','move15','0')
+{"a":"move10","u_id":"1436522156420482","type":"variables","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB","b":"move17"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1436522156420482','variable','FB','move10','move17','0')
+{"a":"move0","u_id":"1436522156420482","type":"variables","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB","b":"move10"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1436522156420482','variable','FB','move0','move10','0')
+{"u_id":"1436522156420482","utils":"dashboard","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+{"a":"value","u_id":"1436522156420482","type":"absolute","password":"5QrFz5N2Casjhq3eYDBh9qKk","change":"reaches","stock":"FB","b":"10"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1436522156420482','constant','FB','value','10','1')
+{"u_id":"1436522156420482","metric":"value","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB"}
+{"u_id":"1436522156420482","metric":"value","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB"}
+{"u_id":"1436522156420482","metric":"value","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB"}
+{"u_id":"1436522156420482","metric":"move10","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB"}
+{"password":"5QrFz5N2Casjhq3eYDBh9qKk","utils":"dashboard","u_id":"1436522156420482"}
+{"u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","utils":"dashboard"}
+{"greater":"1000","stock":"FB","u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"value"}
+{"currency":"$","change":"reaches","u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","b":"10","type":"absolute","stock":"FB","a":"value"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1436522156420482','constant','FB','value','10','1')
+{"u_id":"1626652780683777","greater":"10","password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB","metric":"move10"}
+{"greater":"10","metric":"move10","password":"5QrFz5N2Casjhq3eYDBh9qKk","u_id":"1626652780683777","stock":"FB"}
+{"type":"absolute","stock":"FB","a":"move10","b":"10","password":"5QrFz5N2Casjhq3eYDBh9qKk","u_id":"1626652780683777","greater":"simple moving average"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','FB','move10','10','1')
+{"type":"absolute","stock":"FB","a":"move10","b":"10","password":"5QrFz5N2Casjhq3eYDBh9qKk","u_id":"1626652780683777","greater":"simple moving average"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','FB','move10','10','1')
+{"password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB","metric":"move45","u_id":"1626652780683777"}
+{"type":"relative","stock":"FB","a":"move10","b":"45","password":"5QrFz5N2Casjhq3eYDBh9qKk","u_id":"1626652780683777","change":"down"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','FB','move10','92.277','1')
+{"stock":"FB","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"move10","u_id":"1626652780683777","greater":"45"}
+{"stock":"FB","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"move10","u_id":"1626652780683777","greater":"45"}
+{"stock":"MSFT","number":"25","password":"5QrFz5N2Casjhq3eYDBh9qKk","currency":"$","metric":"value","u_id":"1626652780683777"}
+{"type":"absolute","stock":"MSFT","a":"value","b":"25","password":"5QrFz5N2Casjhq3eYDBh9qKk","currency":"$","u_id":"1626652780683777","change":"reaches"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','value','25','1')
+{"type":"percent","stock":"MSFT","a":"value","b":"25","password":"5QrFz5N2Casjhq3eYDBh9qKk","change":"down","u_id":"1626652780683777"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','value','48.6975','1')
+{"password":"5QrFz5N2Casjhq3eYDBh9qKk","u_id":"1626652780683777","utils":"dashboard"}
+{"type":"absolute","stock":"FB","a":"value","b":"100","password":"5QrFz5N2Casjhq3eYDBh9qKk","u_id":"1436522156420482","change":"reaches"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1436522156420482','constant','FB','value','100','1')
+{"password":"5QrFz5N2Casjhq3eYDBh9qKk","u_id":"1436522156420482","utils":"dashboard"}
+{"type":"percent","stock":"MSFT","a":"move10","b":"25","password":"5QrFz5N2Casjhq3eYDBh9qKk","change":"down","u_id":"1626652780683777"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','move10','48.35475','1')
+{"password":"5QrFz5N2Casjhq3eYDBh9qKk","u_id":"1436522156420482","utils":"alerts"}
+{"password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"FB","metric":"value","u_id":"1436522156420482"}
+{"password":"5QrFz5N2Casjhq3eYDBh9qKk","stock":"SDGFBY","metric":"value","u_id":"1436522156420482"}
+{"type":"percent","stock":"MSFT","a":"move10","b":"30","password":"5QrFz5N2Casjhq3eYDBh9qKk","change":"down","u_id":"1626652780683777"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','move10','45.1311','1')
+{"type":"absolute","stock":"AAPL","a":"weighted moving average","password":"5QrFz5N2Casjhq3eYDBh9qKk","b":"10","u_id":"1626652780683777","change":"reaches"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','AAPL','weighted moving average','10','1')
+{"type":"variables","stock":"AAPL","a":"move30","b":"weight10","password":"5QrFz5N2Casjhq3eYDBh9qKk","lesser":"10","u_id":"1626652780683777","greater":"30"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','variable','AAPL','move30','weight10','0')
+{"type":"relative","a":"value","b":"0","u_id":"1626652780683777","change":"up","stock":"AMZN","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','AMZN','value','852.46','0')
+{"u_id":"1626652780683777","stock":"AMZN","metric":"value","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+{"u_id":"1626652780683777","stock":"AMZN","metric":"value","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+{"u_id":"1626652780683777","utils":"dashboard","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+{"u_id":"1626652780683777","metric":"volume","stock":"AMZN","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+{"a":"volume","b":"20","stock":"FB","u_id":"1626652780683777","change":"up","password":"5QrFz5N2Casjhq3eYDBh9qKk","type":"percent"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','FB','volume','19576935.6','0')
+{"a":"move10","b":"17","greater":"10","stock":"FB","u_id":"1626652780683777","password":"5QrFz5N2Casjhq3eYDBh9qKk","type":"absolute"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','FB','move10','17','1')
+{"stock":"FB","u_id":"1626652780683777","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"move10"}
+{"stock":"FB","u_id":"1626652780683777","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"weight50"}
+{"u_id":"1436522156420482","stock":"AAPL","type":"percent","b":"10","a":"move10","change":"up","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1436522156420482','constant','AAPL','move10','152.6943','0')
+{"stock":"FB","u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"value"}
+{"stock":"NFLX","u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"value"}
+{"stock":"NFLX","u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"move10"}
+{"u_id":"1436522156420482","stock":"NFLX","type":"percent","b":"10","a":"move10","change":"down","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1436522156420482','constant','NFLX','move10','127.0773','1')
+{"u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","utils":"alerts"}
+{"stock":"NFLX","u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"value"}
+{"u_id":"1436522156420482","stock":"NFLX","type":"absolute","b":"30","a":"simple moving average","change":"reaches","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1436522156420482','constant','NFLX','simple moving average','30','1')
+{"stock":"AAPL","u_id":"1436522156420482","greater":"100","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"value"}
+{"u_id":"1436522156420482","stock":"AAPL","type":"absolute","b":"200","a":"value","change":"reaches","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1436522156420482','constant','AAPL','value','200','0')
+{"stock":"NFLX","u_id":"1626652780683777","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"value"}
+{"u_id":"1436522156420482","password":"5QrFz5N2Casjhq3eYDBh9qKk","utils":"alerts"}
+{"u_id":"1626652780683777","stock":"AAPL","type":"percent","b":"30","a":"simple moving average","change":"reaches","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','AAPL','simple moving average','0','0')
+{"stock":"AAPL","u_id":"1626652780683777","number":"30","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"simple moving average"}
+{"u_id":"1626652780683777","stock":"FB","type":"percent","b":"15","a":"value","change":"up","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','FB','value','159.6085','0')
+{"u_id":"1626652780683777","stock":"MSFT","type":"absolute","b":"150","currency":"$","a":"value","change":"reaches","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','value','150','0')
+{"stock":"FB","u_id":"1626652780683777","number":"30","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"simple moving average"}
+{"greater":"10","u_id":"1626652780683777","stock":"FB","type":"variables","b":"move30","a":"move10","password":"5QrFz5N2Casjhq3eYDBh9qKk","lesser":"30"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','variable','FB','move10','move30','0')
+{"u_id":"1626652780683777","stock":"MSFT","type":"absolute","b":"150","currency":"$","a":"value","change":"reaches","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','MSFT','value','150','0')
+{"u_id":"1626652780683777","stock":"AMZN","type":"percent","b":"10","a":"value","change":"up","password":"5QrFz5N2Casjhq3eYDBh9qKk"}
+INSERT INTO `alerts`(`u_id`,`type`,`stock`, `a`, `b`,`neg`) VALUES ('1626652780683777','constant','AMZN','value','937.706','0')
+{"stock":"AMZN","u_id":"1626652780683777","password":"5QrFz5N2Casjhq3eYDBh9qKk","metric":"value"}

@@ -1,0 +1,11 @@
+[11-Mar-2017 17:52:28 EST] PHP Fatal error:  Call to undefined function get_info() in /home/dancahn/public_html/anyonetrades/api/get_info.php on line 15
+[11-Mar-2017 17:52:46 EST] PHP Fatal error:  Call to undefined function get_info() in /home/dancahn/public_html/anyonetrades/api/get_info.php on line 16
+[11-Mar-2017 17:52:47 EST] PHP Fatal error:  Call to undefined function get_info() in /home/dancahn/public_html/anyonetrades/api/get_info.php on line 16
+[11-Mar-2017 17:53:00 EST] PHP Fatal error:  Call to undefined function get_info() in /home/dancahn/public_html/anyonetrades/api/get_info.php on line 16
+[11-Mar-2017 17:53:15 EST] PHP Fatal error:  Call to undefined function get_info() in /home/dancahn/public_html/anyonetrades/api/get_info.php on line 16
+[11-Mar-2017 17:53:33 EST] PHP Fatal error:  Function name must be a string in /home/dancahn/public_html/anyonetrades/analysis.php on line 17
+[11-Mar-2017 17:54:09 EST] PHP Fatal error:  Function name must be a string in /home/dancahn/public_html/anyonetrades/analysis.php on line 17
+[11-Mar-2017 17:54:09 EST] PHP Fatal error:  Function name must be a string in /home/dancahn/public_html/anyonetrades/analysis.php on line 17
+[11-Mar-2017 17:54:10 EST] PHP Fatal error:  Function name must be a string in /home/dancahn/public_html/anyonetrades/analysis.php on line 17
+[11-Mar-2017 19:41:57 EST] PHP Fatal error:  Call to undefined function get_info() in /home/dancahn/public_html/anyonetrades/api/create_alert.php on line 15
+[11-Mar-2017 19:42:22 EST] PHP Fatal error:  Call to undefined function get_info() in /home/dancahn/public_html/anyonetrades/api/create_alert.php on line 15
