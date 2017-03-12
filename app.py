@@ -41,10 +41,12 @@ def webhook():
                         send_message(sender_id, "Sorry, this format is not supported.")
                         return "ok", 200
 
+                    # get output from wit.ai
                     wit_out = parse_message(message_text, w)
 
                     log(wit_out)
 
+                    # add our password and user id to the json
                     wit_out['password'] = os.environ["PHPPASSWORD"]
                     wit_out['u_id'] = sender_id
 
@@ -60,6 +62,7 @@ def webhook():
                         elif wit_out['change'] == 'up' or wit_out['change'] == 'down':
                             wit_out['type'] = 'relative'
 
+                        # metric was specified
                         if wit_out.has_key('metric'):
                             wit_out['a'] = key_to_lang(wit_out.pop(wit_out['metric']))
                             
