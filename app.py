@@ -47,7 +47,7 @@ def webhook():
                         return "ok", 200
 
                     if message_text.lower() == "refresh":
-                        requests.post("http://www.anyonetrades.com/api/alerts.php", verify=False)
+                        requests.post("http://www.anyonetrades.com/alerts.php", verify=False)
                         return "ok", 200
 
                     # get output from wit.ai
